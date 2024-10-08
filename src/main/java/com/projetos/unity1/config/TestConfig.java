@@ -28,8 +28,8 @@ public class TestConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Person p1 = new Person(null, "Joao Gabriel","aaa@gmail.com", 30);
-		Person p2 = new Person(null, "Gabriel","bbb@gmail.com", 20);
+        Person p1 = new Person(null, "Joao Gabriel","aaa@gmail.com", 30, null);
+		Person p2 = new Person(null, "Gabriel","bbb@gmail.com", 20, null);
         
         repository.saveAll(Arrays.asList(p1,p2));
     }
