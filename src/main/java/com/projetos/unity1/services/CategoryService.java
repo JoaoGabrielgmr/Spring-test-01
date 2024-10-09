@@ -9,10 +9,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 
-import com.projetos.unity1.entities.Person;
-import com.projetos.unity1.repositories.PersonRepository;
+import com.projetos.unity1.entities.Category;
+import com.projetos.unity1.repositories.CategoryRepository;
 
 /**
  *
@@ -20,17 +21,17 @@ import com.projetos.unity1.repositories.PersonRepository;
  */
 
 @Service
-public class PersonService {
+public class CategoryService {
 
     @Autowired
-    PersonRepository personRepository;
+    CategoryRepository categoryRepository;
 
-    public List<Person> findAll(){
-        return personRepository.findAll();
+    public List<Category> findAll(){
+        return categoryRepository.findAll();
     }
 
-    public Person findById(Long id) {
-        Optional<Person> obj = personRepository.findById(id);
+    public Category findById(Long id) {
+        Optional<Category> obj = categoryRepository.findById(id);
         return obj.get();
     }
 }

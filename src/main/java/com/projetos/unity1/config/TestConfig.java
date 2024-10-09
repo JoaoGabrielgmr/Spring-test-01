@@ -13,9 +13,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.projetos.unity1.entities.Category;
 import com.projetos.unity1.entities.Order;
 import com.projetos.unity1.entities.Person;
 import com.projetos.unity1.entities.enums.OrderStatus;
+import com.projetos.unity1.repositories.CategoryRepository;
 import com.projetos.unity1.repositories.OrderRepository;
 import com.projetos.unity1.repositories.PersonRepository;
 
@@ -31,11 +33,20 @@ public class TestConfig implements CommandLineRunner {
     private PersonRepository personRepository;
       @Autowired
     private OrderRepository orderRepository;
+      @Autowired
+    private CategoryRepository categoryRepository;
 
    
 
     @Override
     public void run(String... args) throws Exception {
+
+        Category c1 = new Category(null, "Eletronics");
+        Category c2 = new Category(null, "Computers");
+        Category c3 = new Category(null, "Books");
+
+        categoryRepository.saveAll(Arrays.asList(c1,c2,c3));
+
         Person p1 = new Person(null, "Joao Gabriel","aaa@gmail.com", 30, null);
 		Person p2 = new Person(null, "Gabriel","bbb@gmail.com", 20, null);
         personRepository.saveAll(Arrays.asList(p1,p2));
