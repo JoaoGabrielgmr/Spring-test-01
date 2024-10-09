@@ -13,8 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.projetos.unity1.entities.Order;
-import com.projetos.unity1.entities.Person;
-import com.projetos.unity1.repositories.PersonRepository;
+import com.projetos.unity1.repositories.OrderRepository;
 
 /**
  *
@@ -22,17 +21,17 @@ import com.projetos.unity1.repositories.PersonRepository;
  */
 
 @Service
-public class PersonService {
+public class OrderService {
 
     @Autowired
-    PersonRepository personRepository;
+    OrderRepository orderRepository;
 
-    public List<Person> findAll(){
-        return personRepository.findAll();
+    public List<Order> findAll(){
+        return orderRepository.findAll();
     }
 
-    public Person findById(Long id) {
-        Optional<Person> obj = personRepository.findById(id);
+    public Order findById(Long id) {
+        Optional<Order> obj = orderRepository.findById(id);
         return obj.get();
     }
 }

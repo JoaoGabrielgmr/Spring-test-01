@@ -8,6 +8,8 @@ package com.projetos.unity1.entities;
 import java.io.Serializable;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -49,6 +51,7 @@ public class Person implements Serializable {
 	@EqualsAndHashCode.Exclude
 	@Setter(AccessLevel.NONE)
 	//fazendo a associacao de chave estrangeira
+	@JsonIgnore
 	@OneToMany(mappedBy="client")
 	private List<Order> orders;
 
