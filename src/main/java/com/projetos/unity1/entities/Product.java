@@ -30,27 +30,37 @@ import lombok.Setter;
 @NoArgsConstructor
 
 @Entity
-@Table(name = "tb_category")
-public class Category implements Serializable{
+@Table(name = "tb_product")
+public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @EqualsAndHashCode.Exclude
     private String name;
 
+    @EqualsAndHashCode.Exclude
+    private String description;
+
+    @EqualsAndHashCode.Exclude
+    private Double price;
+
+    @EqualsAndHashCode.Exclude
+    private String imgUrl;
+
     //relaçao muitos pra muitos
     @EqualsAndHashCode.Exclude
-    @Setter(AccessLevel.NONE)
     @Transient
-    private Set<Product> products = new HashSet<>();
+    @Setter(AccessLevel.NONE)
+    private Set<Category> categories = new HashSet<>();
 
-    public Category(Long id, String name) {
+    public Product(Integer id, String name, String description, Double price, String imgUrl) {
         this.id = id;
         this.name = name;
+        this.description = description;
+        this.price = price;
+        this.imgUrl = imgUrl;
     }
-
-    
 }

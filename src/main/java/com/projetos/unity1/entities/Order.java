@@ -29,8 +29,9 @@ import lombok.Setter;
  * @author jggmr
  */
 @Data
-@Entity
 @NoArgsConstructor
+
+@Entity
 @Table(name = "tb_order")
 public class Order implements Serializable{
     private static final long serialVersionUID = 1L;
