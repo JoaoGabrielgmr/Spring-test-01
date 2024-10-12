@@ -13,8 +13,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,8 +54,12 @@ public class Product implements Serializable {
 
     //relaçao muitos pra muitos
     @EqualsAndHashCode.Exclude
-    @Transient
     @Setter(AccessLevel.NONE)
+
+    @ManyToMany
+    @JoinTable(name = "tb_product_category",
+     inverseJoinColumns = @JoinColumn(name = "category_id"),
+     joinColumns = @JoinColumn(name = "product_id"))
     private Set<Category> categories = new HashSet<>();
 
     public Product(Integer id, String name, String description, Double price, String imgUrl) {
