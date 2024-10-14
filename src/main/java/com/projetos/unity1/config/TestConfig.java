@@ -15,10 +15,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.projetos.unity1.entities.Category;
 import com.projetos.unity1.entities.Order;
+import com.projetos.unity1.entities.OrderItem;
 import com.projetos.unity1.entities.Person;
 import com.projetos.unity1.entities.Product;
 import com.projetos.unity1.entities.enums.OrderStatus;
 import com.projetos.unity1.repositories.CategoryRepository;
+import com.projetos.unity1.repositories.OrderItemRepository;
 import com.projetos.unity1.repositories.OrderRepository;
 import com.projetos.unity1.repositories.PersonRepository;
 import com.projetos.unity1.repositories.ProductRepository;
@@ -37,8 +39,11 @@ public class TestConfig implements CommandLineRunner {
     private OrderRepository orderRepository;
       @Autowired
     private CategoryRepository categoryRepository;
-      @Autowired
-    private ProductRepository productRepository;
+    @Autowired
+  private ProductRepository productRepository;
+    @Autowired
+  private OrderItemRepository orderItemRepository;
+
 
   
     @Override
@@ -79,6 +84,13 @@ public class TestConfig implements CommandLineRunner {
       
       productRepository.saveAll(Arrays.asList(p1,p2,p3,p4,p5));
       
+      OrderItem oi1 = new OrderItem(o1,p1,p1.getPrice(),2);
+      OrderItem oi2 = new OrderItem(o1,p3,p4.getPrice(),2);
+      OrderItem oi3 = new OrderItem(o2,p3,p1.getPrice(),2);
+      OrderItem oi4 = new OrderItem(o3,p5,p5.getPrice(),2);
+
+      orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+
     }
 
 

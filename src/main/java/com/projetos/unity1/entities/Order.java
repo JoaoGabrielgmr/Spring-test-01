@@ -7,6 +7,8 @@ package com.projetos.unity1.entities;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projetos.unity1.entities.enums.OrderStatus;
@@ -17,9 +19,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import lombok.AccessLevel;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,7 +30,7 @@ import lombok.Setter;
  *
  * @author jggmr
  */
-@Data
+@EqualsAndHashCode
 @NoArgsConstructor
 
 @Entity
@@ -40,17 +42,25 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+
     @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-mm-dd'T'HH:mm:ss'Z'", timezone="GMT")
+    @EqualsAndHashCode.Exclude
     private Instant moment;
 
-    @Setter(AccessLevel.NONE)
-    @Getter(AccessLevel.NONE)
+    @EqualsAndHashCode.Exclude
     private Integer orderStatus;
 
     //criando chave estrangeira e dando nome
     @JoinColumn(name = "clientId")
     @ManyToOne
+    @Getter
+    @Setter
+    @EqualsAndHashCode.Exclude
     private Person client;
+
+    @OneToMany(mappedBy = "id.order")
+    @EqualsAndHashCode.Exclude
+    private Set<OrderItem> items = new HashSet<>();
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, Person client) {
         this.id = id;
@@ -69,4 +79,8 @@ public class Order implements Serializable{
         return OrderStatus.valueOf(orderStatus);
     }
     
+    public Set<OrderItem> getItems(){
+        return items;
+    }
+
 }
