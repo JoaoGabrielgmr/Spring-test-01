@@ -13,6 +13,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.projetos.unity1.entities.enums.OrderStatus;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +21,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -42,25 +44,32 @@ public class Order implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
-    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-mm-dd'T'HH:mm:ss'Z'", timezone="GMT")
     @EqualsAndHashCode.Exclude
+    @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="yyyy-mm-dd'T'HH:mm:ss'Z'", timezone="GMT")
     private Instant moment;
 
     @EqualsAndHashCode.Exclude
     private Integer orderStatus;
 
     //criando chave estrangeira e dando nome
-    @JoinColumn(name = "clientId")
-    @ManyToOne
     @Getter
     @Setter
     @EqualsAndHashCode.Exclude
+    @JoinColumn(name = "clientId")
+    @ManyToOne
     private Person client;
 
-    @OneToMany(mappedBy = "id.order")
+
     @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "id.order")
     private Set<OrderItem> items = new HashSet<>();
+
+
+    @EqualsAndHashCode.Exclude
+    @Getter
+    @Setter
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Payment payment;
 
     public Order(Long id, Instant moment, OrderStatus orderStatus, Person client) {
         this.id = id;

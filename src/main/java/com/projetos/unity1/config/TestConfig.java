@@ -16,6 +16,7 @@ import org.springframework.context.annotation.Profile;
 import com.projetos.unity1.entities.Category;
 import com.projetos.unity1.entities.Order;
 import com.projetos.unity1.entities.OrderItem;
+import com.projetos.unity1.entities.Payment;
 import com.projetos.unity1.entities.Person;
 import com.projetos.unity1.entities.Product;
 import com.projetos.unity1.entities.enums.OrderStatus;
@@ -64,7 +65,6 @@ public class TestConfig implements CommandLineRunner {
       Category c1 = new Category(null, "Eletronics");
       Category c2 = new Category(null, "Computers");
       Category c3 = new Category(null, "Books");
-  
       
       Product p1 = new Product(null, "The Lord of the Rings", "Lorem ipsum dolor sit amet, consectetur.", 90.5, "");
       Product p2 = new Product(null, "Smart TV", "Nulla eu imperdiet purus. Maecenas ante.", 2190.0, "");
@@ -91,6 +91,10 @@ public class TestConfig implements CommandLineRunner {
 
       orderItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 
+      Payment pay1 = new Payment(null,Instant.parse("2019-07-22T15:21:22Z"), o1);
+      o1.setPayment(pay1);
+
+      orderRepository.save(o1);
     }
 
 
