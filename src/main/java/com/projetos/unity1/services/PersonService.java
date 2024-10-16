@@ -37,4 +37,8 @@ public class PersonService {
     public Person insert(Person obj){
         return personRepository.save(obj);
     }
-}
+
+    public void delete(Long id){
+        personRepository.deleteById(id);
+    }
+}   
