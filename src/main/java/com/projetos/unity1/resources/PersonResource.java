@@ -23,6 +23,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 
 
@@ -60,7 +62,13 @@ public class PersonResource {
     public ResponseEntity<Void> delete(@PathVariable Long id){
         service.delete(id);
         return ResponseEntity.noContent().build();
-    } 
+    }
+    
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<Person> update(@PathVariable Long id, @RequestBody Person obj) {
+        obj = service.update(id, obj);
+        return ResponseEntity.ok().body(obj);
+    }
     
     
 }

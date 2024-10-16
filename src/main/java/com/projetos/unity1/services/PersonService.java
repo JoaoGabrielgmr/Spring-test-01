@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Service;
 
 import com.projetos.unity1.entities.Person;
@@ -41,4 +42,17 @@ public class PersonService {
     public void delete(Long id){
         personRepository.deleteById(id);
     }
-}   
+
+    public Person update(Long id, Person obj){
+        Person entity = personRepository.getReferenceById(id);
+        updateData(entity, obj);
+        return personRepository.save(entity);
+    }
+    
+    private void updateData(Person entity, Person obj){
+        entity.setName(obj.getName());
+        entity.setEmail(obj.getEmail());
+        entity.setPhone(obj.getPhone());
+    }
+    
+}    
