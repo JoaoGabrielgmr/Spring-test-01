@@ -51,8 +51,8 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
       
-      Person person1 = new Person(null, "Joao Gabriel","aaa@gmail.com", 30, null);
-      Person person2 = new Person(null, "Gabriel","bbb@gmail.com", 20, null);
+      Person person1 = new Person(null, "Maria Brown", "maria@gmail.com", "988888888", "123456",null);
+      Person person2 = new Person(null, "Alex Green", "alex@gmail.com", "977777777", "123456",null); 
 
       personRepository.saveAll(Arrays.asList(person1,person2));
 

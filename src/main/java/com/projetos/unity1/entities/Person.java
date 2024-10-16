@@ -50,7 +50,11 @@ public class Person implements Serializable {
 	private String email;
 
 	@EqualsAndHashCode.Exclude
-	private int age;
+	private String phone;
+
+	@EqualsAndHashCode.Exclude
+	private String password;
+
 
 	//fazendo a associacao de chave estrangeira
 	@EqualsAndHashCode.Exclude
