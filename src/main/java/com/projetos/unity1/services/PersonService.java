@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.projetos.unity1.entities.Person;
 import com.projetos.unity1.repositories.PersonRepository;
+import com.projetos.unity1.services.exceptions.ResourceNotFoundException;
 
 /**
  *
@@ -32,7 +33,7 @@ public class PersonService {
 
     public Person findById(Long id) {
         Optional<Person> obj = personRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> new ResourceNotFoundException(id));
     }
 
     public Person insert(Person obj){
